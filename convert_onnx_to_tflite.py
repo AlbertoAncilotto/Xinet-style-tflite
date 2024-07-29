@@ -37,6 +37,8 @@ def convert_onnx(onnx_model_path, model_name='model'):
             yield [content_tensor] 
 
     converter.representative_dataset = representative_dataset
+    converter._experimental_disable_per_channel = True
+    # converter.experimental_new_converter = False #for per tensor quantization
 
     # Convert the model
     converter.optimizations = [tf.lite.Optimize.DEFAULT]
