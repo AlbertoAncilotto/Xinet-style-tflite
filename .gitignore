@@ -3,5 +3,5 @@ __pycache__/
 *.bat
 *.npy
 *.npz
-*_nomp*
+*_nobn*
 tflite_int8_nobn/
