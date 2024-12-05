@@ -5,3 +5,4 @@ __pycache__/
 *.npz
 *_nobn*
 tflite_int8_nobn/
+*_sliced*

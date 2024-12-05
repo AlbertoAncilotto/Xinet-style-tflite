@@ -41,7 +41,7 @@ def process_images(style_transform_paths, image_folder, out_size=(320,320)):
 
             img = cv2.resize(img, (in_shape[2], in_shape[3]))
             content_tensor = np.transpose(img, (2, 0, 1))
-            content_tensor = np.expand_dims(content_tensor, axis=0).astype(np.float32) / 255.0
+            content_tensor = np.expand_dims(content_tensor, axis=0).astype(np.float32) #/ 255.0
             generated_tensor = session.run([output_name], {input_name: content_tensor})[0]
             generated_image = generated_tensor.squeeze()
             generated_image = generated_image.transpose(1, 2, 0).astype(np.uint8)

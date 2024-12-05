@@ -1,5 +1,6 @@
 import onnx
-from onnx_tf.backend import prepare
+# from onnx_tf.backend import prepare
+from onnx2tf import convert
 import tensorflow as tf
 import numpy as np
 import cv2
@@ -21,9 +22,13 @@ def convert_onnx(onnx_model_path, model_name='model'):
 
     print('model input:', input_shape)
 
-    # Convert the ONNX model to a TensorFlow model
-    tf_rep = prepare(onnx_model)
-    tf_rep.export_graph("tensorflow_model/style_transfer")
+    # Convert using onnx_tf
+    # tf_rep = prepare(onnx_model)
+    # tf_rep.export_graph("tensorflow_model/style_transfer")
+    
+    # Convert using onnx2tf
+    # convert(onnx_model, "tensorflow_model/style_transfer") # also change input from NCHW to NHWC 
+    convert(onnx_model, "tensorflow_model/style_transfer", keep_shape_absolutely_input_names=[input_tensor.name])
 
     # Step 2: Convert TensorFlow Model to TFLite
     converter = tf.lite.TFLiteConverter.from_saved_model("tensorflow_model/style_transfer")
